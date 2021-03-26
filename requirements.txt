@@ -2,4 +2,4 @@ bottle
 ipython
 pytest
 pytest-mock
-
+pyyaml
