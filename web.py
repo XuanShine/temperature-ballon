@@ -91,6 +91,6 @@ def get_temperature():
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, file)))})
 
 
-threading.Thread(target=register_temperature.start())
+threading.Thread(target=register_temperature).start()
 
 temperature.run(host="0.0.0.0", port=8081)
