@@ -1,0 +1,2 @@
+/home/pi/temperature-ballon/main.py:41: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  capteurs_connus = yaml.load(f_in)  # {<id_capteur>: <name_capteur>, ...}
