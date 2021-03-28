@@ -3,3 +3,4 @@ ipython
 pytest
 pytest-mock
 pyyaml
+mpld3

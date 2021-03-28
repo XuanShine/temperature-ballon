@@ -11,6 +11,7 @@ import datetime
 
 import yaml
 
+routes_capteurs = "/sys/bus/w1/devices/"
 
 def lire_fichier(emplacement) :
     fichier = open(emplacement)
@@ -34,8 +35,6 @@ def sauvegarde(temperature, date, emplacement):
 def main():
     # routes_capteurs = glob.glob("/sys/bus/w1/devices/28*/w1_slave")
     # capteurs_name = ["Capteur1", "Capteur2"]
-
-    routes_capteurs = "/sys/bus/w1/devices/"
 
     with open("capteurs.yaml", "r") as f_in:
         capteurs_connus = yaml.load(f_in)  # {<id_capteur>: <name_capteur>, ...}
