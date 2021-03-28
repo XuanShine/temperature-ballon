@@ -46,19 +46,23 @@ def index():
             name = file[:-8]
             capteurs.append({"name": capteurs_connus.get(name, name),
                              "data": get_history(file)})
+    fig, ax = plt.subplots()
+
+    for capteur in capteurs:
+        ax.plot(*prepare_for_plot(capteur), label=capteur["name"])
+    ax.legend()
+    # plt.show()
+    return mpld3.fig_to_html(fig)
+
+
+def prepare_for_plot(capteur):
     a, b = [], []
-    for data in capteurs[0]["data"]:
+    for data in capteur["data"]:
         a.append(datetime.strptime(data[0], '%d/%m/%Y %H:%M:%S'))
         b.append(data[1])
+    return np.array(a), np.array(b)
 
-
-    a = np.array(a, dtype='datetime64')
-    b = np.array(b)
-    plt.plot(a, b)
-    plt.show()
-
-
-def get_history(capteur, n_data=60*24*7):
+def get_history(capteur, n_data=60*24*3):
     with open(f"{capteur}", "r") as f_in:
         data = f_in.readlines()
     # data = [tuple(info.strip().split("   ")) for info in data]
@@ -84,3 +88,6 @@ def get_temperature():
             capteurs.append({"name": capteurs_connus.get(file, "inconnu"),
                              "id": file,
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, file)))})
+
+
+temperature.run(host="0.0.0.0", port=8081)
