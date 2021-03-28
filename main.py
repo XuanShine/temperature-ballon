@@ -56,3 +56,6 @@ def main():
             time.sleep(60)
     else :
         print("Sonde non détectee. Vérifier le branchement, ou rendez-vous dans la section montrant une solution possible")
+
+if __name__ == "__main__":
+    main()
