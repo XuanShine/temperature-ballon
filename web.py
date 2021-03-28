@@ -8,6 +8,7 @@ logging.basicConfig(filename=os.path.join(C, "run_server.log"), level=logging.IN
 from datetime import datetime
 import json
 import yaml
+import threading
 
 from bottle import run, template, Bottle, route, response, Response
 from bottle import jinja2_view
@@ -89,5 +90,7 @@ def get_temperature():
                              "id": file,
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, file)))})
 
+
+threading.Thread(target=register_temperature.start()
 
 temperature.run(host="0.0.0.0", port=8081)
