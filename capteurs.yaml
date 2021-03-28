@@ -1,4 +1,4 @@
 28-03069779dab7: ballon 1
-28-030797799298: boucle -> sortie ballon droite
-28-031597794cbc: sortie ballon droite -> sortie ballon gauche
-28-030797798c88: sortie ballon gauche -> boucle
+28-030797799298: sortie ballon droite
+28-031597794cbc: sortie ballon gauche
+28-030797798c88: boucle
