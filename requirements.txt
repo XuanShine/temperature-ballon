@@ -4,3 +4,5 @@ pytest
 pytest-mock
 pyyaml
 mpld3
+matplotlib
+numpy
