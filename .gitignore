@@ -1,3 +1,7 @@
+*.templog
+nohup.out
+run_server.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
