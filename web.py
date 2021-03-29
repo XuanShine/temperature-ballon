@@ -38,7 +38,7 @@ def get_ip():
 temperature = Bottle()
 bottle.TEMPLATE_PATH.insert(0, os.path.join(C, 'views'))
 
-@temperature.route("/{days:int}")
+@temperature.route("/{days:float}")
 def index(days=3):
     with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
