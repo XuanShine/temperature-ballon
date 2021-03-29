@@ -40,7 +40,7 @@ bottle.TEMPLATE_PATH.insert(0, os.path.join(C, 'views'))
 
 @temperature.route("/")
 def index():
-    with open("capteurs.yaml", "r") as f_in:
+    with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
     capteurs = []
     for file in os.listdir(C):

@@ -39,7 +39,7 @@ def main():
     with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in)  # {<id_capteur>: <name_capteur>, ...}
 
-    capteurs_presents = {capteur for capteur in os.listdir(os.path.join(C, routes_capteurs)) if capteur.startswith("28")}
+    capteurs_presents = {capteur for capteur in os.listdir(routes_capteurs) if capteur.startswith("28")}
     capteurs_inconnus = capteurs_presents - capteurs_connus.keys()
     capteurs_absents = capteurs_connus.keys() - capteurs_presents
 
