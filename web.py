@@ -15,6 +15,7 @@ from bottle import jinja2_view
 import bottle
 
 from main import main as register_temperature
+from main import monitor_temperature
 from main import extraire_temperature, lire_fichier, routes_capteurs
 import matplotlib.pyplot as plt, mpld3
 import numpy as np
@@ -84,13 +85,14 @@ def get_temperature():
     with open("capteurs.yaml", "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
     capteurs = []
-    for file in os.listdir(C):
+    for capteur in os.listdir(routes_capteurs):
         if "28" in file:
-            capteurs.append({"name": capteurs_connus.get(file, "inconnu"),
-                             "id": file,
-                             "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, file)))})
+            capteurs.append({"name": capteurs_connus.get(capteur, "inconnu"),
+                             "id": capteur,
+                             "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))})
 
 
 threading.Thread(target=register_temperature).start()
+threading.Thread(target=monitor_temperature).start()
 
 temperature.run(host="0.0.0.0", port=8081)
