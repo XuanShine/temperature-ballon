@@ -57,5 +57,13 @@ def main():
     else :
         print("Sonde non détectee. Vérifier le branchement, ou rendez-vous dans la section montrant une solution possible")
 
+def monitor_temperature():
+    """Types d’alertes possible:
+    - Température du ballon trop bas
+    - Les capteurs ne répondent pas
+    - 
+    """
+    pass
+
 if __name__ == "__main__":
     main()
