@@ -90,6 +90,7 @@ def get_temperature():
             capteurs.append({"name": capteurs_connus.get(capteur, "inconnu"),
                              "id": capteur,
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))})
+    return capteurs
 
 
 threading.Thread(target=register_temperature).start()
