@@ -82,7 +82,7 @@ def get_temperature():
     """Retourne les valeurs en JSON:
     [{nom_du_capteur: temperature}, ..]
     """
-    with open("capteurs.yaml", "r") as f_in:
+    with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
     capteurs = dict()
     for capteur in os.listdir(routes_capteurs):
