@@ -84,16 +84,15 @@ def get_temperature():
     """
     with open("capteurs.yaml", "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
-    capteurs = []
+    capteurs = dict()
     for capteur in os.listdir(routes_capteurs):
         if "28" in capteur:
-            capteurs.append({"name": capteurs_connus.get(capteur, "inconnu"),
-                             "id": capteur,
-                             "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))})
+            capteurs[id] = {"name": capteurs_connus.get(capteur, "inconnu"),
+                            "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))}
 
     response.content_type = "application/json"
     response.set_header('Access-Control-Allow-Origin', '*')
-    return {"data": capteurs}
+    return capteurs
 
 
 threading.Thread(target=register_temperature).start()
