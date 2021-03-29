@@ -86,7 +86,7 @@ def get_temperature():
         capteurs_connus = yaml.safe_load(f_in.read())
     capteurs = []
     for capteur in os.listdir(routes_capteurs):
-        if "28" in file:
+        if "28" in capteur:
             capteurs.append({"name": capteurs_connus.get(capteur, "inconnu"),
                              "id": capteur,
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))})
