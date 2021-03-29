@@ -48,7 +48,7 @@ def index(days=3):
         if "28" in file:
             name = file[:-8]
             capteurs.append({"name": capteurs_connus.get(name, name),
-                             "data": get_history(file, days*24*60)})
+                             "data": get_history(file, int(days*24*60))})
     fig, ax = plt.subplots()
 
     for capteur in capteurs:
