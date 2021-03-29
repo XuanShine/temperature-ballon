@@ -90,10 +90,10 @@ def get_temperature():
             capteurs.append({"name": capteurs_connus.get(capteur, "inconnu"),
                              "id": capteur,
                              "temperature": extraire_temperature(lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave")))})
-                             
+
     response.content_type = "application/json"
     response.set_header('Access-Control-Allow-Origin', '*')
-    return capteurs
+    return {"data": capteurs}
 
 
 threading.Thread(target=register_temperature).start()
