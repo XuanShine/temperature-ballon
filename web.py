@@ -38,8 +38,8 @@ def get_ip():
 temperature = Bottle()
 bottle.TEMPLATE_PATH.insert(0, os.path.join(C, 'views'))
 
-@temperature.route("/")
-def index():
+@temperature.route("/{days:int}")
+def index(days=3):
     with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in.read())
     capteurs = []
@@ -47,13 +47,12 @@ def index():
         if "28" in file:
             name = file[:-8]
             capteurs.append({"name": capteurs_connus.get(name, name),
-                             "data": get_history(file)})
+                             "data": get_history(file, days*24*60)})
     fig, ax = plt.subplots()
 
     for capteur in capteurs:
         ax.plot(*prepare_for_plot(capteur), label=capteur["name"])
     ax.legend()
-    # plt.show()
     return mpld3.fig_to_html(fig)
 
 
