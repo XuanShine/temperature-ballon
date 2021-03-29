@@ -36,7 +36,7 @@ def main():
     # routes_capteurs = glob.glob("/sys/bus/w1/devices/28*/w1_slave")
     # capteurs_name = ["Capteur1", "Capteur2"]
 
-    with open("capteurs.yaml", "r") as f_in:
+    with open(os.path.join(C, "capteurs.yaml"), "r") as f_in:
         capteurs_connus = yaml.safe_load(f_in)  # {<id_capteur>: <name_capteur>, ...}
 
     capteurs_presents = {capteur for capteur in os.listdir(routes_capteurs) if capteur.startswith("28")}
