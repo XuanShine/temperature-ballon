@@ -65,7 +65,7 @@ def prepare_for_plot(capteur):
     return np.array(a), np.array(b)
 
 def get_history(capteur, n_data=60*24*3):
-    with open(f"{capteur}", "r") as f_in:
+    with open(f"{os.path.join(C, capteur)}", "r") as f_in:
         data = f_in.readlines()
     # data = [tuple(info.strip().split("   ")) for info in data]
     data = list(map(lambda x: (x[0], float(x[1])),
