@@ -46,16 +46,17 @@ def main():
     logging.info(f"Capteurs Présents: {capteurs_presents}\nCapteursConnus: {capteurs_connus}\nCapteurs Inconnus: {capteurs_inconnus}\nCapteurs Absents: {capteurs_absents}")
 
 
-    if len(routes_capteurs) > 0 :
-        while True:
-            date = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            for capteur in capteurs_presents:
-                contenu_fichier = lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave"))
-                temperature = extraire_temperature(contenu_fichier)
-                sauvegarde(temperature, date, os.path.join(C, capteur) + ".templog")
-            time.sleep(60)
-    else :
-        print("Sonde non détectee. Vérifier le branchement, ou rendez-vous dans la section montrant une solution possible")
+    while True:
+        date = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        capteurs_presents = {capteur for capteur in os.listdir(routes_capteurs) if capteur.startswith("28")}
+        for capteur in capteurs_presents:
+            contenu_fichier = lire_fichier(os.path.join(routes_capteurs, capteur, "w1_slave"))
+            temperature = extraire_temperature(contenu_fichier)
+            sauvegarde(temperature, date, os.path.join(C, capteur) + ".templog")
+        else:
+            logging.warning("Capteurs Non détectés.")
+        time.sleep(60)
+    
 
 def monitor_temperature():
     """Types d’alertes possible:
